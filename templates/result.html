@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Search Result</title>
+</head>
+<body>
+    <h1>Employee Name: {{ employee_name }}</h1>
+    <form method="post" action="{{ url_for('submit_attendance') }}">
+        <input type="hidden" name="employee_id" value="{{ employee_id }}">
+        <input type="text" name="check_in" value="04/29/2023 02:23:47">
+        <input name="latitude" value="{{ latitude }}">
+        <input name="longitude" value="{{ longitude }}">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

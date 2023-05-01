@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <div style="text-align: center; margin-bottom: 10px; background: white; padding: 20px;">
+
+    <img src="https://arab-engineering-company.odoo.com/web/image/website/1/logo/Arab%20Engineering%20Company?unique=2e3c4b2" width="100px"/>
+        </div>
+    <div style="padding: 30px; text-color: gray; text-align: center; font-size: 13px;">
+    This is your online attendance location tracker connected to Arab Engineering Company Odoo ERP attendance system. Your location is being tracked.
+</div>
+    <style>
+        body {
+            background-color: #222;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: none;
+            background-color: #444;
+            color: white;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #00bfff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0080ff;
+        }
+
+        @media only screen and (min-width: 768px) {
+            /* Apply styles for devices with a minimum width of 768px (e.g. tablets and desktops) */
+            body {
+                max-width: 500px;
+                margin: 0 auto;
+                text-align: left;
+                padding: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form method="POST" action="/submit">
+        <label for="employee_id">Employee ID:</label>
+        <input type="text" id="employee_id" name="employee_id"><br><br>
+
+        <label for="current_time">Current Time:</label>
+        <input type="text" id="current_time" name="current_time" readonly><br><br>
+
+        <label for="current_date">Current Date:</label>
+        <input type="text" id="current_date" name="current_date" readonly><br><br>
+
+        <label for="current_location">Current Location:</label>
+        <input type="text" id="current_location" name="current_location" readonly><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+    <div style="text-align: center; margin-top: 10px;">
+        Powered By
+    <img src="https://www.hst.jo/web/image/website/1/logo/Hamilton%20Smart%20Engineering?unique=0480bdf" width="100px"/>
+        </div>
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        document.getElementById("current_location").value = position.coords.latitude + "," + position.coords.longitude;
+    }
+
+    function getCurrentTime() {
+        var now = new Date();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+        var timeString = hours.toString().padStart(2, '0') + ":" + minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
+        document.getElementById("current_time").value = timeString;
+    }
+
+    function getCurrentDate() {
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = (now.getMonth() + 1).toString().padStart(2, '0');
+        var day = now.getDate().toString().padStart(2, '0');
+        var dateString = day + "-" + month + "-" + year;
+        document.getElementById("current_date").value = dateString;
+    }
+
+    getCurrentTime();
+    getCurrentDate();
+    getLocation();
+</script>
